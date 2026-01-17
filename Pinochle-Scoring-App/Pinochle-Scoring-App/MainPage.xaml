@@ -4,7 +4,7 @@
              x:Class="Pinochle_Scoring_App.MainPage">
 
     <ScrollView>
-        <VerticalStackLayout>
+        <VerticalStackLayout Padding="30">
 
             <Label HorizontalOptions="Center" FontSize="Medium">
 Players: 4 (2 teams)
@@ -39,7 +39,8 @@ Fails bid → loses bid amount
 First team to 150 or 250 wins
             </Label> 
                 <Button Text="Start New Game" 
-                      Clicked="OnStartNewGameButtonClicked"/>
+                      Clicked="OnStartNewGameButtonClicked"
+                        Margin="5,5,5,5"/>
         </VerticalStackLayout>
     </ScrollView>
 

@@ -3,53 +3,57 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Pinochle_Scoring_App.ScoringPage"
              Title="ScoringPage">
-    <VerticalStackLayout>
-        <VerticalStackLayout>
-            <HorizontalStackLayout>
+    <VerticalStackLayout Spacing="20" Padding="20">
+        <VerticalStackLayout Spacing="10">
+            <HorizontalStackLayout Spacing="5">
                 <Label Text="{Binding Team1.Name}"/>
                 <Label Text=" Score: "/>
                 <Label Text="{Binding Team1.Score}"/>
             </HorizontalStackLayout>
-            <HorizontalStackLayout>
+            <HorizontalStackLayout Spacing="5">
                 <Label Text="{Binding Team2.Name}"/>
                 <Label Text=" Score:  "/>
-
                <Label Text="{Binding Team2.Score}"/>
             </HorizontalStackLayout>
-
         </VerticalStackLayout>
-        <VerticalStackLayout
-            x:Name="Bidding">
 
+        <VerticalStackLayout
+            x:Name="Bidding"
+            Spacing="15">
             <Entry Placeholder="Enter Bid Amount"
                x:Name="BidAmount"
-               Keyboard="Numeric"/>
-        <Label 
-            Text="Who took the bid?"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
-        <Button Text="{Binding Team1.Name}"
-                Clicked="OnTeam1Bid"/>
+               Keyboard="Numeric"
+               Margin="0,0,0,10"/>
+            <Label 
+                Text="Who took the bid?"
+                VerticalOptions="Center" 
+                HorizontalOptions="Center"
+                Margin="0,0,0,10"/>
+            <Button Text="{Binding Team1.Name}"
+                Clicked="OnTeam1Bid"
+                Margin="0,0,0,5"/>
             <Button Text="{Binding Team2.Name}"
                 Clicked="OnTeam2Bid"/>
-
         </VerticalStackLayout>
-            <!-- Display the selected team and bid -->
+
+        <!-- Display the selected team and bid -->
         <Label x:Name="BidResultLabel"
                IsVisible="False"
                FontSize="18"
                FontAttributes="Bold"
                HorizontalOptions="Center"
-               Margin="0,20,0,0"/>
+               Margin="0,10,0,10"/>
 
         <VerticalStackLayout
             x:Name="Melding"
-            IsVisible="false">
+            IsVisible="false"
+            Spacing="15">
             <Label 
                 Text="Enter Meld Points"
-                VerticalOptions="Center"/>
+                VerticalOptions="Center"
+                Margin="0,0,0,10"/>
 
-            <HorizontalStackLayout>
+            <HorizontalStackLayout Spacing="10">
                 <Label Text="{Binding Team1.Name}"
                        VerticalOptions="Center" 
                        HorizontalOptions="Center" />
@@ -58,17 +62,17 @@
                        Keyboard="Numeric"/>
                 <Button Text="Add Meld"
                         Clicked="Team1AddMeld"/>
-                </HorizontalStackLayout>
-                    <HorizontalStackLayout>
-                        <Label Text="{Binding Team2.Name}"
+            </HorizontalStackLayout>
+            <HorizontalStackLayout Spacing="10">
+                <Label Text="{Binding Team2.Name}"
                        VerticalOptions="Center" 
                        HorizontalOptions="Center" />
-                        <Entry Placeholder="Score"
+                <Entry Placeholder="Score"
                        x:Name="Team2MeldPoints"
                        Keyboard="Numeric"/>
-                    <Button Text="Add Meld"
+                <Button Text="Add Meld"
                         Clicked="Team2AddMeld"/>
-                </HorizontalStackLayout>
+            </HorizontalStackLayout>
             <Button Text="Continue to Trick Scoring"
                     Clicked="OnStartTrickScoring"
                     Margin="0,20,0,0"/>
@@ -76,22 +80,24 @@
 
         <VerticalStackLayout
             x:Name="TrickScoring"
-            IsVisible="false">
+            IsVisible="false"
+            Spacing="15">
             <Label 
                 Text="Enter Trick Points"
-                VerticalOptions="Center"/>
+                VerticalOptions="Center"
+                Margin="0,0,0,10"/>
 
-            <HorizontalStackLayout>
+            <HorizontalStackLayout Spacing="10">
                 <Label Text="{Binding Team1.Name}"
                        VerticalOptions="Center" 
                        HorizontalOptions="Center" />
                 <Entry Placeholder="Score"
-                       x:Name="Team1TrickPoints"
+                       x:Name="Team1TrickPoints"        
                        Keyboard="Numeric"/>
                 <Button Text="Add Trick Points"
                         Clicked="Team1AddTrickPoints"/>
             </HorizontalStackLayout>
-            <HorizontalStackLayout>
+            <HorizontalStackLayout Spacing="10">
                 <Label Text="{Binding Team2.Name}"
                        VerticalOptions="Center" 
                        HorizontalOptions="Center" />
