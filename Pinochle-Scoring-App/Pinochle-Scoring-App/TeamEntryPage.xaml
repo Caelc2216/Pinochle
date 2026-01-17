@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Pinochle_Scoring_App.TeamEntryPage"
+             Title="Team Entry">
+    <VerticalStackLayout HorizontalOptions="Center" Padding="20" Spacing="10">
+        <Label Text="Enter Team/Player Names:"
+               FontSize="Medium"
+               HorizontalOptions="Center"/>
+
+        <HorizontalStackLayout Spacing="10">
+            <Entry Text="{Binding Team1Name}" 
+                   Placeholder="Team 1 Name"
+                   WidthRequest="200"/>
+            <Button Text="Set Name"
+                    Clicked="SetTeam1Name"/>
+        </HorizontalStackLayout>
+        
+        <Label Text="{Binding DisplayedTeam1Name, StringFormat='Team 1: {0}'}"
+               FontSize="Small"
+               TextColor="Green"
+               IsVisible="{Binding DisplayedTeam1Name, Converter={StaticResource IsStringNotEmptyConverter}}"
+               HorizontalOptions="Center"/>
+
+        <HorizontalStackLayout Spacing="10">
+            <Entry Text="{Binding Team2Name}"
+                   Placeholder="Team 2 Name"
+                   WidthRequest="200"/>
+            <Button Text="Set Name"
+                    Clicked="SetTeam2Name"/>
+        </HorizontalStackLayout>
+        
+        <Label Text="{Binding DisplayedTeam2Name, StringFormat='Team 2: {0}'}"
+               FontSize="Small"
+               TextColor="Green"
+               IsVisible="{Binding DisplayedTeam2Name, Converter={StaticResource IsStringNotEmptyConverter}}"
+               HorizontalOptions="Center"/>
+
+        <Button Text="Continue to Scoring"
+                Clicked="OnStartScoring"
+                Margin="0,20,0,0"/>
+    </VerticalStackLayout>
+</ContentPage>

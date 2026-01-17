@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Pinochle_Scoring_App.ScoringPage"
+             Title="ScoringPage">
+    <VerticalStackLayout>
+        <VerticalStackLayout>
+            <HorizontalStackLayout>
+                <Label Text="{Binding Team1.Name}"/>
+                <Label Text=" Score: "/>
+                <Label Text="{Binding Team1.Score}"/>
+            </HorizontalStackLayout>
+            <HorizontalStackLayout>
+                <Label Text="{Binding Team2.Name}"/>
+                <Label Text=" Score:  "/>
+
+               <Label Text="{Binding Team2.Score}"/>
+            </HorizontalStackLayout>
+
+        </VerticalStackLayout>
+        <VerticalStackLayout
+            x:Name="Bidding"
+            
+        <Entry Placeholder="Enter Bid Amount"
+               x:Name="BidAmount"
+               Keyboard="Numeric"/>
+        <Label 
+            Text="Who took the bid?"
+            VerticalOptions="Center" 
+            HorizontalOptions="Center" />
+        <Button Text="{Binding Team1.Name}"
+                Clicked="OnTeam1Bid"/>
+            <Button Text="{Binding Team2.Name}"
+                Clicked="OnTeam2Bid"/>
+
+        </VerticalStackLayout>
+            <!-- Display the selected team and bid -->
+        <Label x:Name="BidResultLabel"
+               IsVisible="False"
+               FontSize="18"
+               FontAttributes="Bold"
+               HorizontalOptions="Center"
+               Margin="0,20,0,0"/>
+
+        <VerticalStackLayout
+            x:Name="Melding"
+            IsVisible="false">
+            <Label 
+                Text="Enter Meld Points"
+                VerticalOptions="Center"/>
+
+            <HorizontalStackLayout>
+                <Label Text="{Binding Team1.Name}"
+                       VerticalOptions="Center" 
+                       HorizontalOptions="Center" />
+                <Entry Placeholder="Score"
+                       x:Name="Team1MeldPoints"
+                       Keyboard="Numeric"/>
+                <Button Text="Add Meld"
+                        Clicked="Team1AddMeld"/>
+                </HorizontalStackLayout>
+                    <HorizontalStackLayout>
+                        <Label Text="{Binding Team2.Name}"
+                       VerticalOptions="Center" 
+                       HorizontalOptions="Center" />
+                        <Entry Placeholder="Score"
+                       x:Name="Team2MeldPoints"
+                       Keyboard="Numeric"/>
+                    <Button Text="Add Meld"
+                        Clicked="Team2AddMeld"/>
+                </HorizontalStackLayout>
+            <Button Text="Continue to Trick Scoring"
+                    Clicked="OnStartTrickScoring"
+                    Margin="0,20,0,0"/>
+        </VerticalStackLayout>
+
+        <VerticalStackLayout
+            x:Name="TrickScoring"
+            IsVisible="false">
+            <Label 
+                Text="Enter Trick Points"
+                VerticalOptions="Center"/>
+
+            <HorizontalStackLayout>
+                <Label Text="{Binding Team1.Name}"
+                       VerticalOptions="Center" 
+                       HorizontalOptions="Center" />
+                <Entry Placeholder="Score"
+                       x:Name="Team1TrickPoints"
+                       Keyboard="Numeric"/>
+                <Button Text="Add Trick Points"
+                        Clicked="Team1AddTrickPoints"/>
+            </HorizontalStackLayout>
+            <HorizontalStackLayout>
+                <Label Text="{Binding Team2.Name}"
+                       VerticalOptions="Center" 
+                       HorizontalOptions="Center" />
+                <Entry Placeholder="Score"
+                       x:Name="Team2TrickPoints"
+                       Keyboard="Numeric"/>
+                <Button Text="Add Trick Points"
+                        Clicked="Team2AddTrickPoints"/>
+            </HorizontalStackLayout>
+            <Button Text="Next Round"
+                    Clicked="NextRound"
+                    Margin="0,20,0,0"/>
+        </VerticalStackLayout>
+
+    </VerticalStackLayout>
+</ContentPage>

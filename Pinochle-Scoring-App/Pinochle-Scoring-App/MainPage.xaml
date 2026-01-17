@@ -1,0 +1,46 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Pinochle_Scoring_App.MainPage">
+
+    <ScrollView>
+        <VerticalStackLayout>
+
+            <Label HorizontalOptions="Center" FontSize="Medium">
+Players: 4 (2 teams)
+Deck: 48 cards (9–A, two of each suit)
+Rank: A 10 K Q J 9
+
+1. Deal and Bid
+Deal 12 cards each
+Starting left of dealer, bid or pass
+Highest bid wins, sets trump, leads first
+Bid = minimum points to make
+2. Meld
+All players show meld
+Score immediately; cards stay in hand
+                
+Common Melds:
+Run (A-10-K-Q-J trump) = 15
+Marriage (K+Q) = 2 (trump = 4)
+Pinochle (Q♠ J♦) = 4
+Aces/Kings/Queens/Jacks around = 10/8/6/4
+3. Play Tricks
+Must follow suit
+If not, play trump
+Must win if able
+Trick winner leads next
+4. Score
+Trick points: A=1, 10=1, last trick=1 (25 total)
+                
+Bidding team:
+Makes bid → scores all points
+Fails bid → loses bid amount
+First team to 150 or 250 wins
+            </Label> 
+                <Button Text="Start New Game" 
+                      Clicked="OnStartNewGameButtonClicked"/>
+        </VerticalStackLayout>
+    </ScrollView>
+
+</ContentPage>
