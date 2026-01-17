@@ -23,17 +23,26 @@
             <Entry Placeholder="Enter Bid Amount"
                x:Name="BidAmount"
                Keyboard="Numeric"
-               Margin="0,0,0,10"/>
+               Margin="0,0,0,10"
+               TextChanged="OnBidAmountChanged"/>
             <Label 
                 Text="Who took the bid?"
                 VerticalOptions="Center" 
                 HorizontalOptions="Center"
-                Margin="0,0,0,10"/>
+                Margin="0,0,0,10"
+                x:Name="BidPromptLabel"
+                IsVisible="False"/>
             <Button Text="{Binding Team1.Name}"
                 Clicked="OnTeam1Bid"
-                Margin="0,0,0,5"/>
+                Margin="0,0,0,5"
+                    BackgroundColor="#193829"
+                    x:Name="Team1BidButton"
+                    IsVisible="False"/>
             <Button Text="{Binding Team2.Name}"
-                Clicked="OnTeam2Bid"/>
+                Clicked="OnTeam2Bid"
+                    BackgroundColor="#193829"
+                    x:Name="Team2BidButton"
+                    IsVisible="False"/>
         </VerticalStackLayout>
 
         <!-- Display the selected team and bid -->
@@ -61,7 +70,8 @@
                        x:Name="Team1MeldPoints"
                        Keyboard="Numeric"/>
                 <Button Text="Add Meld"
-                        Clicked="Team1AddMeld"/>
+                        Clicked="Team1AddMeld"
+                        BackgroundColor="#193829"/>
             </HorizontalStackLayout>
             <HorizontalStackLayout Spacing="10">
                 <Label Text="{Binding Team2.Name}"
@@ -71,11 +81,13 @@
                        x:Name="Team2MeldPoints"
                        Keyboard="Numeric"/>
                 <Button Text="Add Meld"
-                        Clicked="Team2AddMeld"/>
+                        Clicked="Team2AddMeld"
+                        BackgroundColor="#193829"/>
             </HorizontalStackLayout>
             <Button Text="Continue to Trick Scoring"
                     Clicked="OnStartTrickScoring"
-                    Margin="0,20,0,0"/>
+                    Margin="0,20,0,0"
+                    BackgroundColor="#193829"/>
         </VerticalStackLayout>
 
         <VerticalStackLayout
@@ -95,7 +107,8 @@
                        x:Name="Team1TrickPoints"        
                        Keyboard="Numeric"/>
                 <Button Text="Add Trick Points"
-                        Clicked="Team1AddTrickPoints"/>
+                        Clicked="Team1AddTrickPoints"
+                        BackgroundColor="#193829"/>
             </HorizontalStackLayout>
             <HorizontalStackLayout Spacing="10">
                 <Label Text="{Binding Team2.Name}"
@@ -105,11 +118,13 @@
                        x:Name="Team2TrickPoints"
                        Keyboard="Numeric"/>
                 <Button Text="Add Trick Points"
-                        Clicked="Team2AddTrickPoints"/>
+                        Clicked="Team2AddTrickPoints"
+                        BackgroundColor="#193829"/>
             </HorizontalStackLayout>
             <Button Text="Next Round"
                     Clicked="NextRound"
-                    Margin="0,20,0,0"/>
+                    Margin="0,20,0,0"
+                    BackgroundColor="#193829"/>
         </VerticalStackLayout>
 
     </VerticalStackLayout>

@@ -38,6 +38,22 @@
 		<TargetPlatformMinVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows'">10.0.17763.0</TargetPlatformMinVersion>
 	</PropertyGroup>
 
+	<PropertyGroup Condition="'$(Configuration)'=='Release'">
+	  <!-- Preserve navigation pages and view models from linker trimming -->
+	  <TrimMode>partial</TrimMode>
+	  <PublishTrimmed>true</PublishTrimmed>
+	  
+	  <!-- Disable interpreter (required for standalone) -->
+	  <UseInterpreter>false</UseInterpreter>
+	  
+	  <!-- Enable AOT for better performance -->
+	  <RunAOTCompilation>false</RunAOTCompilation>
+	  
+	  <!-- Android-specific linker settings -->
+	  <AndroidLinkMode>SdkOnly</AndroidLinkMode>
+	  <AndroidEnableProfiler>false</AndroidEnableProfiler>
+	</PropertyGroup>
+
 	<ItemGroup>
 		<!-- App Icon -->
 		<MauiIcon Include="Resources\AppIcon\appicon.svg" ForegroundFile="Resources\AppIcon\appiconfg.svg" Color="#193829" />

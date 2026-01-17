@@ -40,7 +40,8 @@ First team to 150 or 250 wins
             </Label> 
                 <Button Text="Start New Game" 
                       Clicked="OnStartNewGameButtonClicked"
-                        Margin="5,5,5,5"/>
+                        Margin="5,5,5,5"
+                        BackgroundColor="#193829"/>
         </VerticalStackLayout>
     </ScrollView>
 

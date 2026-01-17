@@ -133,5 +133,15 @@ public partial class ScoringPage : ContentPage
         TrickScoring.IsVisible = false;
     }
 
+    private void OnBidAmountChanged(object sender, TextChangedEventArgs e)
+    {
+        bool hasValidBid = !string.IsNullOrWhiteSpace(e.NewTextValue) && 
+                           int.TryParse(e.NewTextValue, out int bidValue) && 
+                           bidValue > 0;
+        
+        Team1BidButton.IsVisible = hasValidBid;
+        Team2BidButton.IsVisible = hasValidBid;
+        BidPromptLabel.IsVisible = hasValidBid;
+    }
 
 }

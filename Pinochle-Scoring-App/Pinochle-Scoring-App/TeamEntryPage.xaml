@@ -13,7 +13,8 @@
                    Placeholder="Team 1 Name"
                    WidthRequest="200"/>
             <Button Text="Set Name"
-                    Clicked="SetTeam1Name"/>
+                    Clicked="SetTeam1Name"
+                    BackgroundColor="#193829"/>
         </HorizontalStackLayout>
         
         <Label Text="{Binding DisplayedTeam1Name, StringFormat='Team 1: {0}'}"
@@ -27,7 +28,8 @@
                    Placeholder="Team 2 Name"
                    WidthRequest="200"/>
             <Button Text="Set Name"
-                    Clicked="SetTeam2Name"/>
+                    Clicked="SetTeam2Name"
+                    BackgroundColor="#193829"/>
         </HorizontalStackLayout>
         
         <Label Text="{Binding DisplayedTeam2Name, StringFormat='Team 2: {0}'}"
@@ -38,6 +40,7 @@
 
         <Button Text="Continue to Scoring"
                 Clicked="OnStartScoring"
-                Margin="0,20,0,0"/>
+                Margin="0,20,0,0"
+                BackgroundColor="#193829"/>
     </VerticalStackLayout>
 </ContentPage>
