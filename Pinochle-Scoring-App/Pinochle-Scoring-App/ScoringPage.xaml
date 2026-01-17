@@ -19,9 +19,9 @@
 
         </VerticalStackLayout>
         <VerticalStackLayout
-            x:Name="Bidding"
-            
-        <Entry Placeholder="Enter Bid Amount"
+            x:Name="Bidding">
+
+            <Entry Placeholder="Enter Bid Amount"
                x:Name="BidAmount"
                Keyboard="Numeric"/>
         <Label 
