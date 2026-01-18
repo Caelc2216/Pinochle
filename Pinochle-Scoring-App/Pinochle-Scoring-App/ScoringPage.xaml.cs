@@ -43,10 +43,11 @@ public partial class ScoringPage : ContentPage
     {
         if (!string.IsNullOrEmpty(Team1MeldPoints.Text) && int.TryParse(Team1MeldPoints.Text, out int meldAmount))
         {
-            game.Team1.Meld += meldAmount;
-            Team1MeldConfirmLabel.Text = $"Added {meldAmount} meld points";
-            Team1MeldConfirmLabel.IsVisible = true;
-            Team1MeldPoints.Text = string.Empty;
+            if (meldAmount != game.Team1.Meld)
+            {
+                game.Team1.Meld += meldAmount;
+                Team1MeldEntry.IsVisible = false;
+            }
         }
     }
 
@@ -54,10 +55,11 @@ public partial class ScoringPage : ContentPage
     {
         if (!string.IsNullOrEmpty(Team2MeldPoints.Text) && int.TryParse(Team2MeldPoints.Text, out int meldAmount))
         {
-            game.Team2.Meld += meldAmount;
-            Team2MeldConfirmLabel.Text = $"Added {meldAmount} meld points";
-            Team2MeldConfirmLabel.IsVisible = true;
-            Team2MeldPoints.Text = string.Empty;
+            if (meldAmount != game.Team2.Meld)
+            {
+                game.Team2.Meld += meldAmount;
+                Team2MeldEntry.IsVisible = false;
+            }
         }
     }
 
@@ -71,13 +73,13 @@ public partial class ScoringPage : ContentPage
     {
         if (!string.IsNullOrEmpty(Team1TrickPoints.Text) && int.TryParse(Team1TrickPoints.Text, out int trickPoints))
         {
-            game.Team1.TrickPoints += trickPoints;
+            if(game.Team1.TrickPoints == 0)
+            {
+                game.Team1.TrickPoints += trickPoints;
+                Team1TrickEntry.IsVisible = false;
+            }
 
-            Team1TrickConfirmLabel.Text = $"Added {trickPoints} trick points";
-            Team1TrickConfirmLabel.IsVisible = true;
-            Team1TrickPoints.Text = string.Empty;
-
-            if(game.Team1.Bid != null && game.Team1.TrickPoints < game.Team1.Bid)
+            if(game.Team1.Bid != 0 && (game.Team1.TrickPoints + game.Team1.Meld) < game.Team1.Bid)
             {
                 // Team 1 failed to meet their bid
                 game.Team1.Score -= game.Team1.Bid;
@@ -95,13 +97,13 @@ public partial class ScoringPage : ContentPage
     {
         if (!string.IsNullOrEmpty(Team2TrickPoints.Text) && int.TryParse(Team2TrickPoints.Text, out int trickPoints))
         {
-            game.Team2.TrickPoints += trickPoints;
+            if(game.Team2.TrickPoints == 0)
+            {
+                game.Team2.TrickPoints += trickPoints;
+                Team2TrickEntry.IsVisible = false;
+            }
 
-            Team2TrickConfirmLabel.Text = $"Added {trickPoints} trick points";
-            Team2TrickConfirmLabel.IsVisible = true;
-            Team2TrickPoints.Text = string.Empty;
-
-            if (game.Team2.Bid != null && game.Team2.TrickPoints < game.Team2.Bid)
+            if (game.Team2.Bid != 0 && (game.Team2.TrickPoints + game.Team2.Meld) < game.Team2.Bid)
             {
                 // Team 2 failed to meet their bid
                 game.Team2.Score -= game.Team2.Bid;
@@ -138,10 +140,7 @@ public partial class ScoringPage : ContentPage
         Team1TrickPoints.Text = string.Empty;
         Team2TrickPoints.Text = string.Empty;
         BidResultLabel.IsVisible = false;
-        Team1MeldConfirmLabel.IsVisible = false;
-        Team2MeldConfirmLabel.IsVisible = false;
-        Team1TrickConfirmLabel.IsVisible = false;
-        Team2TrickConfirmLabel.IsVisible = false;
+        TrickPointsWarningLabel.IsVisible = false;
         Bidding.IsVisible = true;
         Melding.IsVisible = false;
         TrickScoring.IsVisible = false;
@@ -158,14 +157,60 @@ public partial class ScoringPage : ContentPage
         BidPromptLabel.IsVisible = hasValidBid;
     }
 
-    private void OnNumericEntryTextChanged(object sender, TextChangedEventArgs e)
+    private void OnMeldPointsChanged(object sender, TextChangedEventArgs e)
     {
-        if (sender is Entry entry)
+        bool bothEntriesFilled = !string.IsNullOrWhiteSpace(Team1MeldPoints.Text) &&
+                                 !string.IsNullOrWhiteSpace(Team2MeldPoints.Text);
+
+        ContinueToTrickScoringButton.IsVisible = bothEntriesFilled;
+    }
+
+    private void OnTrickPointsChanged(object sender, TextChangedEventArgs e)
+    {
+        bool bothEntriesFilled = !string.IsNullOrWhiteSpace(Team1TrickPoints.Text) &&
+                                 !string.IsNullOrWhiteSpace(Team2TrickPoints.Text);
+
+        if (bothEntriesFilled)
         {
-            if (!string.IsNullOrEmpty(e.NewTextValue) && !int.TryParse(e.NewTextValue, out _))
+            // Parse the trick points and check if they add up to 25
+            if (int.TryParse(Team1TrickPoints.Text, out int team1Tricks) &&
+                int.TryParse(Team2TrickPoints.Text, out int team2Tricks))
             {
-                entry.Text = e.OldTextValue;
+                int totalTricks = team1Tricks + team2Tricks;
+                
+                if (totalTricks == 25)
+                {
+                    // Valid total - show buttons and Next Round button, hide warning
+                    Team1AddTrickButton.IsVisible = true;
+                    Team2AddTrickButton.IsVisible = true;
+                    NextRoundButton.IsVisible = true;
+                    TrickPointsWarningLabel.IsVisible = false;
+                }
+                else
+                {
+                    // Invalid total - hide buttons and show warning
+                    Team1AddTrickButton.IsVisible = false;
+                    Team2AddTrickButton.IsVisible = false;
+                    NextRoundButton.IsVisible = false;
+                    TrickPointsWarningLabel.IsVisible = true;
+                }
             }
+            else
+            {
+                // Invalid input - hide everything
+                Team1AddTrickButton.IsVisible = false;
+                Team2AddTrickButton.IsVisible = false;
+                NextRoundButton.IsVisible = false;
+                TrickPointsWarningLabel.IsVisible = false;
+            }
+        }
+        else
+        {
+            // Not both entries filled - hide everything
+            Team1AddTrickButton.IsVisible = false;
+            Team2AddTrickButton.IsVisible = false;
+            NextRoundButton.IsVisible = false;
+            TrickPointsWarningLabel.IsVisible = false;
         }
     }
 

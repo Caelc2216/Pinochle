@@ -17,10 +17,10 @@
                    Margin="0,10,0,10"/>
 
             <!-- Score Display Card -->
-            <Frame BackgroundColor="White"
+            <!--<Frame BackgroundColor="White"
                    CornerRadius="10"
                    Padding="20"
-                   HasShadow="True">
+                   HasShadow="True">-->
                 <VerticalStackLayout Spacing="15">
                     <Label Text="Current Scores"
                            FontSize="20"
@@ -53,15 +53,16 @@
                                TextColor="#193829"/>
                     </HorizontalStackLayout>
                 </VerticalStackLayout>
-            </Frame>
+            <!--</Frame>-->
 
             <!-- Bidding Section -->
-            <Frame x:Name="Bidding"
+            <!--<Frame x:Name="Bidding"
                    BackgroundColor="White"
                    CornerRadius="10"
                    Padding="20"
-                   HasShadow="True">
-                <VerticalStackLayout Spacing="15">
+                   HasShadow="True">-->
+                <VerticalStackLayout Spacing="15"
+                                     x:Name="Bidding">
                     <Label Text="Bidding"
                            FontSize="20"
                            FontAttributes="Bold"
@@ -109,16 +110,20 @@
                            HorizontalOptions="Center"
                            Margin="0,10,0,0"/>
                 </VerticalStackLayout>
-            </Frame>
+            <!--</Frame>-->
 
             <!-- Melding Section -->
+            <!--
             <Frame x:Name="Melding"
                    IsVisible="false"
                    BackgroundColor="White"
                    CornerRadius="10"
                    Padding="20"
                    HasShadow="True">
-                <VerticalStackLayout Spacing="15">
+            -->
+                <VerticalStackLayout Spacing="15"
+                                     x:Name="Melding"
+                                     IsVisible="false">
                     <Label Text="Meld Points"
                            FontSize="20"
                            FontAttributes="Bold"
@@ -126,144 +131,98 @@
                            HorizontalOptions="Center"
                            Margin="0,0,0,10"/>
 
-                    <VerticalStackLayout Spacing="10">
-                        <Label Text="{Binding Team1.Name}"
-                               FontSize="16"
-                               FontAttributes="Bold"
-                               HorizontalOptions="Center"/>
-                        <Entry Placeholder="Enter Meld Points"
-                               x:Name="Team1MeldPoints"
-                               Keyboard="Numeric"
-                               FontSize="16"
-                               TextChanged="OnNumericEntryTextChanged"
-                               HorizontalOptions="Fill"/>
-                        <Button Text="Add Meld"
-                                Clicked="Team1AddMeld"
-                                BackgroundColor="#193829"
-                                TextColor="White"
-                                FontSize="16"
-                                CornerRadius="8"
-                                HeightRequest="45"/>
-                        <Label x:Name="Team1MeldConfirmLabel"
-                               IsVisible="False"
-                               FontSize="14"
-                               TextColor="#28a745"
-                               HorizontalOptions="Center"/>
-                    </VerticalStackLayout>
+            <HorizontalStackLayout Spacing="10"
+                                   x:Name="Team1MeldEntry">
+                <Label Text="{Binding Team1.Name}"
+                       VerticalOptions="Center" 
+                       HorizontalOptions="Center" />
+                <Entry Placeholder="Score"
+                       x:Name="Team1MeldPoints"
+                       Keyboard="Numeric"
+                       TextChanged="OnMeldPointsChanged"/>
+                <Button Text="Add Meld"
+                        Clicked="Team1AddMeld"
+                        BackgroundColor="#193829"
+                        x:Name="Team1MeldButton"/>
+            </HorizontalStackLayout>
+            <HorizontalStackLayout Spacing="10"
+                                   x:Name="Team2MeldEntry">
+                <Label Text="{Binding Team2.Name}"
+                       VerticalOptions="Center" 
+                       HorizontalOptions="Center" />
+                <Entry Placeholder="Score"
+                       x:Name="Team2MeldPoints"
+                       Keyboard="Numeric"
+                       TextChanged="OnMeldPointsChanged"/>
+                <Button Text="Add Meld"
+                        Clicked="Team2AddMeld"
+                        BackgroundColor="#193829"
+                        x:Name="Team2MeldButton"/>
+            </HorizontalStackLayout>
+            <Button Text="Continue to Trick Scoring"
+                    x:Name="ContinueToTrickScoringButton"
+                    Clicked="OnStartTrickScoring"
+                    Margin="0,20,0,0"
+                    BackgroundColor="#193829"
+                    IsVisible="False"/>
+        </VerticalStackLayout>
 
-                    <VerticalStackLayout Spacing="10" Margin="0,10,0,0">
-                        <Label Text="{Binding Team2.Name}"
-                               FontSize="16"
-                               FontAttributes="Bold"
-                               HorizontalOptions="Center"/>
-                        <Entry Placeholder="Enter Meld Points"
-                               x:Name="Team2MeldPoints"
-                               Keyboard="Numeric"
-                               FontSize="16"
-                               TextChanged="OnNumericEntryTextChanged"
-                               HorizontalOptions="Fill"/>
-                        <Button Text="Add Meld"
-                                Clicked="Team2AddMeld"
-                                BackgroundColor="#193829"
-                                TextColor="White"
-                                FontSize="16"
-                                CornerRadius="8"
-                                HeightRequest="45"/>
-                        <Label x:Name="Team2MeldConfirmLabel"
-                               IsVisible="False"
-                               FontSize="14"
-                               TextColor="#28a745"
-                               HorizontalOptions="Center"/>
-                    </VerticalStackLayout>
-                    
-                    <Button Text="Continue to Trick Scoring"
-                            Clicked="OnStartTrickScoring"
-                            BackgroundColor="#193829"
-                            TextColor="White"
-                            FontSize="16"
-                            FontAttributes="Bold"
-                            CornerRadius="8"
-                            HeightRequest="50"
-                            Margin="0,20,0,0"/>
-                </VerticalStackLayout>
-            </Frame>
+        <VerticalStackLayout
+            x:Name="TrickScoring"
+            IsVisible="false"
+            Spacing="15">
+            <Label 
+                Text="Enter Trick Points (must add to 25)"
+                VerticalOptions="Center"
+                FontAttributes="Bold"
+                Margin="0,0,0,10"/>
 
-            <!-- Trick Scoring Section -->
-            <Frame x:Name="TrickScoring"
-                   IsVisible="false"
-                   BackgroundColor="White"
-                   CornerRadius="10"
-                   Padding="20"
-                   HasShadow="True">
-                <VerticalStackLayout Spacing="15">
-                    <Label Text="Trick Points"
-                           FontSize="20"
-                           FontAttributes="Bold"
-                           TextColor="#193829"
-                           HorizontalOptions="Center"
-                           Margin="0,0,0,10"/>
-
-                    <VerticalStackLayout Spacing="10">
-                        <Label Text="{Binding Team1.Name}"
-                               FontSize="16"
-                               FontAttributes="Bold"
-                               HorizontalOptions="Center"/>
-                        <Entry Placeholder="Enter Trick Points"
-                               x:Name="Team1TrickPoints"        
-                               Keyboard="Numeric"
-                               FontSize="16"
-                               TextChanged="OnNumericEntryTextChanged"
-                               HorizontalOptions="Fill"/>
-                        <Button Text="Add Trick Points"
-                                Clicked="Team1AddTrickPoints"
-                                BackgroundColor="#193829"
-                                TextColor="White"
-                                FontSize="16"
-                                CornerRadius="8"
-                                HeightRequest="45"/>
-                        <Label x:Name="Team1TrickConfirmLabel"
-                               IsVisible="False"
-                               FontSize="14"
-                               TextColor="#28a745"
-                               HorizontalOptions="Center"/>
-                    </VerticalStackLayout>
-
-                    <VerticalStackLayout Spacing="10" Margin="0,10,0,0">
-                        <Label Text="{Binding Team2.Name}"
-                               FontSize="16"
-                               FontAttributes="Bold"
-                               HorizontalOptions="Center"/>
-                        <Entry Placeholder="Enter Trick Points"
-                               x:Name="Team2TrickPoints"
-                               Keyboard="Numeric"
-                               FontSize="16"
-                               TextChanged="OnNumericEntryTextChanged"
-                               HorizontalOptions="Fill"/>
-                        <Button Text="Add Trick Points"
-                                Clicked="Team2AddTrickPoints"
-                                BackgroundColor="#193829"
-                                TextColor="White"
-                                FontSize="16"
-                                CornerRadius="8"
-                                HeightRequest="45"/>
-                        <Label x:Name="Team2TrickConfirmLabel"
-                               IsVisible="False"
-                               FontSize="14"
-                               TextColor="#28a745"
-                               HorizontalOptions="Center"/>
-                    </VerticalStackLayout>
-                    
-                    <Button Text="Next Round"
-                            Clicked="NextRound"
-                            BackgroundColor="#193829"
-                            TextColor="White"
-                            FontSize="16"
-                            FontAttributes="Bold"
-                            CornerRadius="8"
-                            HeightRequest="50"
-                            Margin="0,20,0,0"/>
-                </VerticalStackLayout>
-            </Frame>
+            <HorizontalStackLayout Spacing="10"
+                                   x:Name="Team1TrickEntry">
+                <Label Text="{Binding Team1.Name}"
+                       VerticalOptions="Center" 
+                       HorizontalOptions="Center" />
+                <Entry Placeholder="Score"
+                       x:Name="Team1TrickPoints"        
+                       Keyboard="Numeric"
+                       TextChanged="OnTrickPointsChanged"/>
+                <Button Text="Add Trick Points"
+                        x:Name="Team1AddTrickButton"
+                        Clicked="Team1AddTrickPoints"
+                        BackgroundColor="#193829"
+                        IsVisible="False"/>
+            </HorizontalStackLayout>
+            <HorizontalStackLayout Spacing="10"
+                                   x:Name="Team2TrickEntry">
+                <Label Text="{Binding Team2.Name}"
+                       VerticalOptions="Center" 
+                       HorizontalOptions="Center" />
+                <Entry Placeholder="Score"
+                       x:Name="Team2TrickPoints"
+                       Keyboard="Numeric"
+                       TextChanged="OnTrickPointsChanged"/>
+                <Button Text="Add Trick Points"
+                        x:Name="Team2AddTrickButton"
+                        Clicked="Team2AddTrickPoints"
+                        BackgroundColor="#193829"
+                        IsVisible="False"/>
+            </HorizontalStackLayout>
+            
+            <!-- Warning label for incorrect total -->
+            <Label x:Name="TrickPointsWarningLabel"
+                   Text="Trick points must add up to 25"
+                   TextColor="Red"
+                   HorizontalOptions="Center"
+                   IsVisible="False"
+                   Margin="0,10,0,0"/>
+            
+            <Button Text="Next Round"
+                    x:Name="NextRoundButton"
+                    Clicked="NextRound"
+                    Margin="0,20,0,0"
+                    BackgroundColor="#193829"
+                    IsVisible="False"/>
+        </VerticalStackLayout>
 
         </VerticalStackLayout>
     </ScrollView>
