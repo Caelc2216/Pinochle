@@ -41,19 +41,23 @@ public partial class ScoringPage : ContentPage
 
     public void Team1AddMeld(object sender, EventArgs e)
     {
-        if (!string.IsNullOrEmpty(Team1MeldPoints.Text))
+        if (!string.IsNullOrEmpty(Team1MeldPoints.Text) && int.TryParse(Team1MeldPoints.Text, out int meldAmount))
         {
-            int meldAmount = int.Parse(Team1MeldPoints.Text);
             game.Team1.Meld += meldAmount;
+            Team1MeldConfirmLabel.Text = $"Added {meldAmount} meld points";
+            Team1MeldConfirmLabel.IsVisible = true;
+            Team1MeldPoints.Text = string.Empty;
         }
     }
 
     public void Team2AddMeld(object sender, EventArgs e)
     {
-        if (!string.IsNullOrEmpty(Team2MeldPoints.Text))
+        if (!string.IsNullOrEmpty(Team2MeldPoints.Text) && int.TryParse(Team2MeldPoints.Text, out int meldAmount))
         {
-            int meldAmount = int.Parse(Team2MeldPoints.Text);
             game.Team2.Meld += meldAmount;
+            Team2MeldConfirmLabel.Text = $"Added {meldAmount} meld points";
+            Team2MeldConfirmLabel.IsVisible = true;
+            Team2MeldPoints.Text = string.Empty;
         }
     }
 
@@ -65,10 +69,13 @@ public partial class ScoringPage : ContentPage
 
     public void Team1AddTrickPoints(object sender, EventArgs e)
     {
-        if (!string.IsNullOrEmpty(Team1TrickPoints.Text))
+        if (!string.IsNullOrEmpty(Team1TrickPoints.Text) && int.TryParse(Team1TrickPoints.Text, out int trickPoints))
         {
-            int trickPoints = int.Parse(Team1TrickPoints.Text);
             game.Team1.TrickPoints += trickPoints;
+
+            Team1TrickConfirmLabel.Text = $"Added {trickPoints} trick points";
+            Team1TrickConfirmLabel.IsVisible = true;
+            Team1TrickPoints.Text = string.Empty;
 
             if(game.Team1.Bid != null && game.Team1.TrickPoints < game.Team1.Bid)
             {
@@ -86,10 +93,13 @@ public partial class ScoringPage : ContentPage
 
     public void Team2AddTrickPoints(object sender, EventArgs e)
     {
-        if (!string.IsNullOrEmpty(Team2TrickPoints.Text))
+        if (!string.IsNullOrEmpty(Team2TrickPoints.Text) && int.TryParse(Team2TrickPoints.Text, out int trickPoints))
         {
-            int trickPoints = int.Parse(Team2TrickPoints.Text);
             game.Team2.TrickPoints += trickPoints;
+
+            Team2TrickConfirmLabel.Text = $"Added {trickPoints} trick points";
+            Team2TrickConfirmLabel.IsVisible = true;
+            Team2TrickPoints.Text = string.Empty;
 
             if (game.Team2.Bid != null && game.Team2.TrickPoints < game.Team2.Bid)
             {
@@ -128,6 +138,10 @@ public partial class ScoringPage : ContentPage
         Team1TrickPoints.Text = string.Empty;
         Team2TrickPoints.Text = string.Empty;
         BidResultLabel.IsVisible = false;
+        Team1MeldConfirmLabel.IsVisible = false;
+        Team2MeldConfirmLabel.IsVisible = false;
+        Team1TrickConfirmLabel.IsVisible = false;
+        Team2TrickConfirmLabel.IsVisible = false;
         Bidding.IsVisible = true;
         Melding.IsVisible = false;
         TrickScoring.IsVisible = false;
@@ -142,6 +156,17 @@ public partial class ScoringPage : ContentPage
         Team1BidButton.IsVisible = hasValidBid;
         Team2BidButton.IsVisible = hasValidBid;
         BidPromptLabel.IsVisible = hasValidBid;
+    }
+
+    private void OnNumericEntryTextChanged(object sender, TextChangedEventArgs e)
+    {
+        if (sender is Entry entry)
+        {
+            if (!string.IsNullOrEmpty(e.NewTextValue) && !int.TryParse(e.NewTextValue, out _))
+            {
+                entry.Text = e.OldTextValue;
+            }
+        }
     }
 
 }

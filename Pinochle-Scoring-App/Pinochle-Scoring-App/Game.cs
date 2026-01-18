@@ -36,36 +36,36 @@ namespace Pinochle_Scoring_App
 
         public void CheckForWinner()
         {
-            if (Team1.Score >= 150)
+            if (Team1.Score >= 150 && Team2.Score >= 150)
             {
-                winner = Team1;
-            }
-            else if (Team2.Score >= 150)
-            {
-                winner = Team2;
-            }
-            else if(Team1.Score >= 150 && Team2.Score >= 150)
-            {
-                if(Team1.Score > Team2.Score)
+                if (Team1.Score > Team2.Score)
                 {
-                    winner = Team1;
+                    Winner = Team1;
                 }
-                else if(Team2.Score > Team1.Score)
+                else if (Team2.Score > Team1.Score)
                 {
-                    winner = Team2;
+                    Winner = Team2;
                 }
                 else
                 {
-                    winner = null; // It's a tie
+                    Winner = null;
                 }
             }
-            else if(Team1.Score - Team2.Score >= 150)
+            else if (Team1.Score >= 150)
             {
-                winner = Team1;
+                Winner = Team1;
             }
-            else if(Team2.Score - Team1.Score >= 150)
+            else if (Team2.Score >= 150)
             {
-                winner = Team2;
+                Winner = Team2;
+            }
+            else if (Team1.Score - Team2.Score >= 150)
+            {
+                Winner = Team1;
+            }
+            else if (Team2.Score - Team1.Score >= 150)
+            {
+                Winner = Team2;
             }
         }
     }
