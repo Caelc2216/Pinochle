@@ -18,6 +18,7 @@ public partial class ScoringPage : ContentPage
             int bidAmount = int.Parse(BidAmount.Text);
             game.Team1.Bid = bidAmount;
             DisplayBidResult(game.Team1.Name, bidAmount);
+            Melding.IsVisible = true;
         }
     }
 
@@ -28,6 +29,7 @@ public partial class ScoringPage : ContentPage
             int bidAmount = int.Parse(BidAmount.Text);
             game.Team2.Bid = bidAmount;
             DisplayBidResult(game.Team2.Name, bidAmount);
+            Melding.IsVisible = true;
         }
     }
 
@@ -141,6 +143,11 @@ public partial class ScoringPage : ContentPage
         Team2TrickPoints.Text = string.Empty;
         BidResultLabel.IsVisible = false;
         TrickPointsWarningLabel.IsVisible = false;
+        Team1MeldEntry.IsVisible = true;  // Add this
+        Team2MeldEntry.IsVisible = true;  // Add this
+        Team1TrickEntry.IsVisible = true;  // Add this
+        Team2TrickEntry.IsVisible = true;  // Add this
+        ContinueToTrickScoringButton.IsVisible = false;  // Add this
         Bidding.IsVisible = true;
         Melding.IsVisible = false;
         TrickScoring.IsVisible = false;
